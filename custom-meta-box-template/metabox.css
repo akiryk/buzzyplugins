@@ -1,0 +1,103 @@
+#prfx_meta{
+    overflow: hidden;
+    padding-bottom: 1em;
+}
+ 
+#prfx_meta p{
+    clear: both;
+}
+ 
+.prfx-row-title{
+    display: block;
+    float: left;
+    width: 200px;
+}
+ 
+.prfx-row-content{
+    float: left;
+    padding-bottom: 1em;
+}
+ 
+.prfx-row-content label{
+    display: block;
+    line-height: 1.75em;
+}
+
+.meta-text-input {
+    width: 60%;
+}
+
+.checkbox-offset {
+    margin-left: 200px;
+}
+
+.major-label {
+    font-size: 1.125em;
+    font-weight: bold;
+    line-height: 1.8;
+    text-transform: uppercase;
+}
+.major-input {
+    /*padding: 3px 8px;
+    font-size: 1.7em;
+    line-height: 100%;
+    height: 1.7em;*/
+    font-weight: bold;
+    text-transform: uppercase;
+    outline: 0;
+}
+
+.remove.button {
+    margin-left: 200px;
+    display: block;
+    width: 140px;
+    text-align: center;
+}
+
+.add.button {
+    background: green;
+    border-color: green;
+    box-shadow: none;
+    color: white;
+    font-weight: bold;
+    margin-left: 200px;
+    text-transform: uppercase;
+}
+
+.add.button:hover {
+    background: #006300;
+    border-color: #006300;
+    box-shadow: none;
+    color: white;
+}
+
+.secondary-books {
+    margin-bottom: 20px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-container img {
+    width: 100%;
+}
+
+.secondary-books .flex-container {
+    width: 748px;
+}
+
+.flex-container .add-image {
+    margin-left: 32px;
+}
+
+.flex-image-thumb {
+    max-width: 125px;
+}
+
+.single-secondary-book {
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+}
