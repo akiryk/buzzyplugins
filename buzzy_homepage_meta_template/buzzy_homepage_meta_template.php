@@ -9,6 +9,16 @@ Author URI: http://akiryk.github.com
 */
 
 /**
+ * Move all "advanced" metaboxes above the default editor
+ */
+add_action('edit_form_after_title', function() {
+    global $post, $wp_meta_boxes;
+    do_meta_boxes(get_current_screen(), 'advanced', $post);
+    unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+});
+
+
+/**
  * Adds a meta box to the post editing screen
  */
 function buzzy_homepage_hero_meta() {
@@ -17,7 +27,7 @@ function buzzy_homepage_hero_meta() {
   $template_file = get_post_meta($post_id, '_wp_page_template', TRUE);
 
   if ($template_file == 'home-main.php') {
-    add_meta_box( 'prfx_meta', __( 'Main Book Promotion', 'prfx-textdomain' ), 'buzzy_homepage_hero_meta_callback', 'page', 'normal', 'high' );
+    add_meta_box( 'prfx_meta', __( 'Main Book Promotion', 'prfx-textdomain' ), 'buzzy_homepage_hero_meta_callback', 'page', 'advanced', 'high' );
   }
 }
 add_action( 'add_meta_boxes', 'buzzy_homepage_hero_meta' );
@@ -143,16 +153,11 @@ function buzzy_homepage_hero_meta_save( $post_id ) {
     update_post_meta( $post_id, 'mb-callout-secondary', sanitize_text_field( $_POST[ 'mb-callout-secondary' ] ) );
   }
 
-  // Checkboxes
-  // if( isset( $_POST[ 'mb-show-message-checkbox' ] ) ) {
-  //   update_post_meta( $post_id, 'mb-show-message-checkbox', 'yes' );
-  // } else {
-  //   update_post_meta( $post_id, 'mb-show-message-checkbox', '' );
-  // }
-
   // Checks for input and saves if needed
   if( isset( $_POST[ 'mb-callout-style' ] ) ) {
-      update_post_meta( $post_id, 'mb-callout-style', $_POST[ 'mb-callout-style' ] );
+    update_post_meta( $post_id, 'mb-callout-style', $_POST[ 'mb-callout-style' ] );
+  } else {
+    update_post_meta( $post_id, 'mb-callout-style', 'callout-minor' );
   }
 
   // Save image
