@@ -46,23 +46,23 @@ add_action( 'admin_print_styles', 'buzzy_bookpage_admin_styles' );
 /**
  * Loads the image management javascript
  */
-function buzzy_bookpage_image_enqueue() {
-    global $typenow;
-    if( $typenow == 'page' ) {
-        wp_enqueue_media();
+// function buzzy_bookpage_image_enqueue() {
+//     global $typenow;
+//     if( $typenow == 'page' ) {
+//         wp_enqueue_media();
  
-        // Registers and enqueues the required javascript.
-        wp_register_script( 'buzzy_book_page_meta_image', plugin_dir_url( __FILE__ ) . 'buzzy_book_page_meta_image.js', array( 'jquery' ) );
-        wp_localize_script( 'buzzy_book_page_meta_image', 'meta_image',
-            array(
-                'title' => __( 'Choose or Upload an Image', 'prfx-textdomain' ),
-                'button' => __( 'Use this image', 'prfx-textdomain' ),
-            )
-        );
-        wp_enqueue_script( 'meta-box-image' );
-    }
-}
-add_action( 'admin_enqueue_scripts', 'buzzy_bookpage_image_enqueue' );
+//         // Registers and enqueues the required javascript.
+//         wp_register_script( 'buzzy_book_page_meta_image', plugin_dir_url( __FILE__ ) . 'buzzy_book_page_meta_image.js', array( 'jquery' ) );
+//         wp_localize_script( 'buzzy_book_page_meta_image', 'meta_image',
+//             array(
+//                 'title' => __( 'Choose or Upload an Image', 'prfx-textdomain' ),
+//                 'button' => __( 'Use this image', 'prfx-textdomain' ),
+//             )
+//         );
+//         wp_enqueue_script( 'meta-box-image' );
+//     }
+// }
+// add_action( 'admin_enqueue_scripts', 'buzzy_bookpage_image_enqueue' );
 
 /**
  * Outputs the content of the meta box
@@ -101,13 +101,6 @@ function buzzy_bookpage_meta_callback( $post ) {
     <label class="prfx-row-title">Buy Link</label>
     <input type="url" name="mb-buy-link-url" class="meta-text-input" value="<?php if ( isset ( $prfx_stored_meta['mb-buy-link-url'] ) ) echo $prfx_stored_meta['mb-buy-link-url'][0]; ?>" />
   </p>
-  <div class="flex-container">
-    <label for="meta-image" class="prfx-row-title"><?php _e( 'Image Upload', 'prfx-textdomain' )?></label>
-    <span class="flex-image-thumb"><img src="<?php echo $prfx_stored_meta['meta-image'][0]; ?>" /></span>
-    <input type="hidden" name="meta-image" id="meta-image" value="<?php if ( isset ( $prfx_stored_meta['meta-image'] ) ) echo $prfx_stored_meta['meta-image'][0]; ?>" />
-    <input type="button" id="meta-image-button" class="button add-image" value="<?php _e( 'Upload or Change Image', 'prfx-textdomain' )?>" />
-  </div>
-
   <?php
 }
 
@@ -152,10 +145,6 @@ function buzzy_bookpage_meta_save( $post_id ) {
   }
   if( isset( $_POST[ 'mb-buy-button-text' ] ) ) {
     update_post_meta( $post_id, 'mb-buy-button-text', sanitize_text_field( $_POST[ 'mb-buy-button-text' ] ) );
-  }
-  // Save image
-  if( isset( $_POST[ 'meta-image' ] ) ) {
-    update_post_meta( $post_id, 'meta-image', $_POST[ 'meta-image' ] );
   }
 }
 add_action( 'save_post', 'buzzy_bookpage_meta_save' );
